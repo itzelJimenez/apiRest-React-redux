@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { showUsers } from '../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { showUsers } from '../actions'
+import { Table } from 'react-bootstrap'
 
 class App extends Component {
 
@@ -11,7 +12,11 @@ class App extends Component {
   renderUsersList() {
     return this.props.users.map((user) => {
       return (
-          <li key={ user.id } >{ user.name }</li>
+          <tr key={ user.id }>
+            <td>{ user.name }</td>
+            <td>{ user.id }</td>
+            <td>{ user.email }</td>
+          </tr>
       )
     })
   }
@@ -20,9 +25,18 @@ class App extends Component {
     return (
       <div>
         <h2>User list</h2>
-        <ul>
-          { this.renderUsersList() }
-        </ul>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.renderUsersList() }
+          </tbody>
+        </Table>
       </div>
     );
   }
